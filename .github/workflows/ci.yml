@@ -17,7 +17,7 @@ jobs:
         pip install mlflow==2.19.0 pandas numpy scikit-learn matplotlib seaborn
 
     - name: Run MLflow Project Execution
+      # Menggunakan fitur bawaan untuk menetapkan lokasi eksekusi
+      working-directory: ./MLProject
       run: |
-        # Masuk dulu ke foldernya, baru jalankan MLflow di titik lokal (.)
-        cd MLProject
         mlflow run . --env-manager=local

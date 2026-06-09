@@ -14,11 +14,7 @@ def train_model():
     mlflow.set_experiment("Telco_Customer_Churn_Experiment")
     
     # 2. Muat Data Hasil Preprocessing
-    data_dir = "D:/Kuliah/Pijak/Eksperimen_SML_Yuusha-Yuzka-Ramzani/preprocessing/namadataset_preprocessing"
-
-    print("Data dir:", data_dir)
-    print("Folder exists:", os.path.exists(data_dir))
-    print("X_train exists:", os.path.exists(os.path.join(data_dir, "X_train.csv")))
+    data_dir = "namadataset_preprocessing"
     X_train = pd.read_csv(os.path.join(data_dir, "X_train.csv"))
     X_test = pd.read_csv(os.path.join(data_dir, "X_test.csv"))
     y_train = pd.read_csv(os.path.join(data_dir, "y_train.csv")).values.ravel()

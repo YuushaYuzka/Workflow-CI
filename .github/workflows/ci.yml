@@ -19,17 +19,12 @@ jobs:
       with:
         python-version: '3.12.7'
 
-    - name: Check Environment Info
-      run: |
-        python --version
-        pip --version
-
-    - name: Install Base Dependencies
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install mlflow==2.19.0 pandas numpy scikit-learn matplotlib seaborn
 
     - name: Run MLflow Project Execution
       run: |
-        # Menjalankan proyek MLflow menggunakan direktori lokal pembungkus
-        mlflow run MLProject/ --no-conda
+        # Mengeksekusi dengan parameter --env-manager=local agar MLflow tidak mencari Conda
+        mlflow run MLProject/ --env-manager=local

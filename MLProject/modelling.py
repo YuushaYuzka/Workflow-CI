@@ -9,12 +9,18 @@ import seaborn as sns
 import os
 
 def train_model():
-    # 1. Set Alamat Tracking URI ke Localhost (Syarat Kriteria 2)
-    mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+    # Simpan hasil MLflow ke folder lokal repository
+    mlflow.set_tracking_uri("file:./mlruns")
     mlflow.set_experiment("Telco_Customer_Churn_Experiment")
-    
-    # 2. Muat Data Hasil Preprocessing
-    data_dir = "namadataset_preprocessing"
+
+    # Path relatif agar bisa dijalankan di GitHub Actions
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(BASE_DIR, "namadataset_preprocessing")
+
+    print("Data dir:", data_dir)
+    print("Folder exists:", os.path.exists(data_dir))
+    print("X_train exists:", os.path.exists(os.path.join(data_dir, "X_train.csv")))
+
     X_train = pd.read_csv(os.path.join(data_dir, "X_train.csv"))
     X_test = pd.read_csv(os.path.join(data_dir, "X_test.csv"))
     y_train = pd.read_csv(os.path.join(data_dir, "y_train.csv")).values.ravel()

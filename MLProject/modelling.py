@@ -14,9 +14,9 @@ def train_model():
     mlflow.set_experiment("Telco_Customer_Churn_Experiment")
 
     # Path relatif agar bisa dijalankan di GitHub Actions
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Menggunakan Current Working Directory (CWD) setelah perintah 'cd' dijalankan
+    BASE_DIR = os.getcwd()
     data_dir = os.path.join(BASE_DIR, "namadataset_preprocessing")
-
     print("Data dir:", data_dir)
     print("Folder exists:", os.path.exists(data_dir))
     print("X_train exists:", os.path.exists(os.path.join(data_dir, "X_train.csv")))

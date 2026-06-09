@@ -18,5 +18,5 @@ jobs:
 
     - name: Run MLflow Project Execution
       run: |
-        # MLflow akan membaca konfigurasi di dalam folder ./MLProject secara lokal
-        mlflow run ./MLProject --env-manager=local
+        # Menggunakan $GITHUB_WORKSPACE untuk memaksa MLflow membaca jalur absolut lokal
+        mlflow run ${{ github.workspace }}/MLProject --env-manager=local

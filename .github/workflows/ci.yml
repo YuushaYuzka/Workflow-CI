@@ -11,12 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.12.7
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12.7'
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install mlflow==2.19.0 pandas numpy scikit-learn matplotlib seaborn
 
-    - name: Run MLflow Project Execution
+    - name: Execute Model Training
       run: |
-        # Menggunakan $GITHUB_WORKSPACE untuk memaksa MLflow membaca jalur absolut lokal
-        mlflow run ${{ github.workspace }}/MLProject --env-manager=local
+        # Mengeksekusi skrip pemodelan secara langsung dari dalam foldernya
+        python MLProject/modelling.py

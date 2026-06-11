@@ -1,3 +1,8 @@
+import os
+import sys
+
+os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
+
 import pandas as pd
 import numpy as np
 import mlflow
@@ -6,8 +11,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
-import sys
 
 def train_model():
     # Mengunci direktori dasar ke tempat skrip berada secara mutlak
@@ -19,14 +22,13 @@ def train_model():
     mlflow.set_experiment("Telco_Customer_Churn_Experiment")
 
     # 2. Ambil jalur data secara dinamis
-    # Jika dijalankan via 'mlflow run', kita paksa membaca direktori asal eksekusi awal
     data_dir = os.path.join(BASE_DIR, "namadataset_preprocessing")
     
     print(f"[DEBUG] Menjalankan kode dari lokasi: {BASE_DIR}")
     print(f"[DEBUG] Mencari direktori data di: {data_dir}")
 
     if not os.path.exists(data_dir):
-        print(f"[WARNING] Jalur {data_dir} tidak ada. Mencoba fallback ke direktori kerja saat ini...")
+        print(f"[WARNING] Jalur {data_dir} tidak ada. Mencoba fallback...")
         data_dir = os.path.join(os.getcwd(), "namadataset_preprocessing")
 
     # Memuat file dataset
@@ -67,8 +69,19 @@ def train_model():
             cm = confusion_matrix(y_test, y_pred)
             plt.figure(figsize=(5,4))
             sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+            
+            # PERBAIKAN: Plot wajib di-save sebagai file dulu sebelum di-log
+            plot_name = f"confusion_matrix_run_{i+1}.png"
+            plot_path = os.path.join(BASE_DIR, plot_name)
+            plt.savefig(plot_path)
             plt.close()
             
+            # Log artefak gambar ke MLflow
+            mlflow.log_artifact(plot_path)
+            if os.path.exists(plot_path):
+                os.remove(plot_path)
+            
+            # Log Model Fisik (Akan mengisi folder artifacts/model)
             mlflow.sklearn.log_model(model, "model")
             print(f"Run {i+1} sukses. Accuracy: {acc:.4f}")
 

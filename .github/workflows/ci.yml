@@ -26,5 +26,5 @@ jobs:
 
     - name: Execute Model Training
       run: |
-        # Mengeksekusi skrip pemodelan secara langsung dari dalam foldernya
-        python MLProject/modelling.py
+          # Menjalankan re-training menggunakan standarisasi MLflow Project
+          mlflow run MLProject --env-manager=local

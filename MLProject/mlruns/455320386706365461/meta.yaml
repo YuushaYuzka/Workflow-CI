@@ -1,0 +1,9 @@
+artifact_location: file:d:\Kuliah\Pijak\Workflow-CI\MLProject\mlruns/455320386706365461
+creation_time: 1781021791064
+effective_trace_archival_retention: null
+experiment_id: '455320386706365461'
+last_update_time: 1781021791064
+lifecycle_stage: active
+name: Telco_Customer_Churn_Experiment
+trace_location: null
+workspace: default

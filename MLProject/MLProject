@@ -1,4 +1,4 @@
-name: Telco_Churn_MLOps_Project
+name: Telco_Churn_CI_Project
 
 entry_points:
   main:

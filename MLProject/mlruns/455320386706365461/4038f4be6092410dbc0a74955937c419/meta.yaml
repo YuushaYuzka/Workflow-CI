@@ -1,0 +1,14 @@
+artifact_uri: file:d:\Kuliah\Pijak\Workflow-CI\MLProject\mlruns/455320386706365461/4038f4be6092410dbc0a74955937c419/artifacts
+end_time: 1781021800893
+entry_point_name: ''
+experiment_id: '455320386706365461'
+lifecycle_stage: active
+run_id: 4038f4be6092410dbc0a74955937c419
+run_name: RandomForest_Run_2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1781021796661
+status: 3
+tags: []
+user_id: ucha
